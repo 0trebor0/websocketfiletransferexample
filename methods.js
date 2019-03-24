@@ -58,14 +58,13 @@ module.exports.client = {
 			if( isJson( chunk1 ) == true ){
 				let array = JSON.parse( chunk1 );
 				if( array.type == 'welcome' ){
-					//this.ws.send( encrypt(JSON.stringify({"type":"welcome","needfile":"./android-studio-ide-182.5264788-windows32.zip"})) );
-					this.ws.send( encrypt(JSON.stringify({"type":"welcome","needfile":"./1280x720.mp4"})) );
+					this.ws.send( encrypt(JSON.stringify({"type":"welcome","needfile":"./FILENAME"})) );
 				} else if( array.type == 'filedata'){
 					if(array.data){
 						this.dataCache.push( Buffer.from(array.data,"hex") );
 					}
 				} else if( array.type == 'filedataend'){
-					fs.writeFileSync("./test.mp4", Buffer.concat( this.dataCache ) );
+					fs.writeFileSync("./FILENAME", Buffer.concat( this.dataCache ) );
 					this.dataCache = [];
 					console.log(this.dataCache);
 					process.exit();
